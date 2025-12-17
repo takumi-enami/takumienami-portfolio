@@ -1,0 +1,48 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+<Layout title="江並拓実 | Portfolio" description="江並拓実の制作物ポートフォリオ">
+  <section class="card">
+    <span class="pill">業務アプリ開発 / 環境計量証明系の業務支援</span>
+    <h1 class="h1" style="margin-top:12px;">江並 拓実</h1>
+    <p class="muted" style="margin:0;">
+      現場の手入力・写真整理・帳票作成を、スマートフォン中心のワークフローに再設計し、データ整理と報告までをスムーズにします。
+    </p>
+    <ul class="list">
+      <li>現場運用を前提にしたUI/入力導線の設計</li>
+      <li>オフライン運用やチーム共有を見据えたデータ設計</li>
+      <li>PDF/Excel/CSVなど“業務で使える出力”まで含めた実装</li>
+    </ul>
+  </section>
+
+  <section id="works" style="margin-top:16px;">
+    <h2 class="h2">Works</h2>
+    <div class="grid">
+      <a class="card" href="/works/asbestosdetailsheet">
+        <div class="pill">FlutterFlow / Cloudflare / Supabase</div>
+        <h3 style="margin:12px 0 6px;">AsbestosDetailSheet</h3>
+        <p class="muted" style="margin:0;">
+          石綿スクリーニング時の仕上表作成・写真/入力情報の整理・PDF/Excel/CSV出力を支援。
+        </p>
+      </a>
+
+      <a class="card" href="/works/qr-measure-demo">
+        <div class="pill">Cloudflare / Supabase</div>
+        <h3 style="margin:12px 0 6px;">QRコード管理・分析測定アプリ（デモ）</h3>
+        <p class="muted" style="margin:0;">
+          分析業務フロー上でのQRラベル印刷と記録の接続をデモとして実装。
+        </p>
+      </a>
+    </div>
+  </section>
+
+  <section id="contact" style="margin-top:16px;">
+    <h2 class="h2">Contact</h2>
+    <div class="card">
+      <p class="muted" style="margin:0;">
+        お問い合わせ：<a href="mailto:info@asb-screening.com">info@asb-screening.com</a>
+      </p>
+    </div>
+  </section>
+</Layout>
+
