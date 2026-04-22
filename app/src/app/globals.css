@@ -322,6 +322,60 @@ button {
   color: var(--text-soft);
 }
 
+
+.hero__cta-row {
+  margin-top: 32px;
+}
+
+.hero__visual {
+  padding: 28px;
+}
+
+.hero__visual-title {
+  margin: 0 0 16px;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.hero__visual-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.hero__preview-card {
+  display: grid;
+  grid-template-columns: 124px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 12px;
+}
+
+.hero__preview-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  aspect-ratio: 4 / 3;
+  background: #fff;
+}
+
+.hero__preview-body h2 {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.hero__preview-body p {
+  margin: 6px 0 0;
+  color: var(--text-soft);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
 .hero__panel {
   padding: 30px;
 }
@@ -565,6 +619,18 @@ button {
 
   .hero__title {
     font-size: clamp(3.1rem, 16vw, 4.6rem);
+  }
+
+  .hero__visual {
+    padding: 18px;
+  }
+
+  .hero__preview-card {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__preview-image {
+    aspect-ratio: 16 / 10;
   }
 
   .button {
