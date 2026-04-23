@@ -26,6 +26,14 @@ export function ProfileSection() {
             {profile.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
+            <div className="profile-career">
+              <h3>{profile.career.heading}</h3>
+              <ul>
+                {profile.career.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
           </Reveal>
         </div>
       </Container>

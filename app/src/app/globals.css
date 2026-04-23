@@ -439,6 +439,37 @@ button {
   padding: 10px 8px;
 }
 
+
+.profile-career {
+  margin-top: 8px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.profile-career h3 {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.profile-career ul {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.profile-career li {
+  color: var(--text-soft);
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+
 .skills-grid,
 .products-grid {
   display: grid;
@@ -635,6 +666,16 @@ button {
 
   .button {
     width: 100%;
+  }
+
+
+  .profile-body {
+    padding: 4px 2px;
+    gap: 18px;
+  }
+
+  .profile-career {
+    padding: 16px;
   }
 
   .product-detail__cover,
