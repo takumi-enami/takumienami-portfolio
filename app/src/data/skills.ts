@@ -2,6 +2,7 @@ export type SkillCategory = {
   title: string;
   description: string;
   items: string[];
+  centerItems?: boolean;
 };
 
 export const skillLead =
@@ -21,7 +22,8 @@ export const skillCategories: SkillCategory[] = [
   {
     title: 'Tools / Platform',
     description: '開発から公開までの流れを小さなチームでも回しやすく整備します。',
-    items: ['GitHub', 'Cloudflare Pages', 'Cloudflare Registrar', 'FileMaker', 'Figma'],
+    items: ['GitHub', 'Cloudflare Pages', 'Cloudflare Registrar'],
+    centerItems: true,
   },
 ];
 

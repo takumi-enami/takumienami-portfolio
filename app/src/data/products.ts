@@ -6,6 +6,7 @@ export type Product = {
   overview: string;
   techStack: string[];
   coverImage: string;
+  iconImage?: string;
   screenshots: string[];
   challenges: string[];
   solutions: string[];
@@ -14,24 +15,26 @@ export type Product = {
 export const products: Product[] = [
   {
     slug: 'building-material-log',
-    title: '建材記録アプリ',
-    category: 'Field Operations',
-    shortDescription: '現場での建材記録をスマートフォンから入力し、写真と履歴を一元管理する業務支援アプリ。',
+    title: 'AsbestosDetailSheet',
+    category: 'Asbestos Screening',
+    shortDescription:
+      '石綿調査の考え方を崩さず、現場で決めた構造のまま建材単位の記録と写真整理を進められるオフライン対応アプリ。',
     overview:
-      '紙やチャットで分散していた建材の搬入記録を一本化し、写真・数量・設置場所をひとつの画面で整理できるようにしたアプリです。入力負荷を抑えながら、あとで確認しやすいデータ構成を重視しました。',
+      '建物の構造や調査の進め方が現場ごとに異なる前提で、案件・棟・内部外部・箇所・部位を柔軟に組み替えながら記録できるようにした石綿調査向けアプリです。固定フォーマットに現場を合わせるのではなく、現場で考えた構造をそのまま残せることを重視しています。',
     techStack: ['FlutterFlow', 'Supabase', 'SQLite', 'Cloudflare Pages'],
     coverImage: '/images/building-material-cover.svg',
+    iconImage: '/images/asbestos-detail-sheet-icon.png',
     screenshots: [
       '/images/building-material-screen-1.svg',
       '/images/building-material-screen-2.svg',
     ],
     challenges: [
-      '現場では入力に時間をかけられず、記録項目が増えるほど定着しにくかった。',
-      '写真、数量、設置場所などの情報が別々に管理され、後から追跡しづらかった。',
+      '内部外部や階層の切り方が案件ごとに異なるため、固定フォーマットでは現場の考え方を記録に落とし込みにくかった。',
+      '建材ごとの写真やメモが後工程で散らばりやすく、事務所に戻ってからの整理負荷が大きかった。',
     ],
     solutions: [
-      '選択式 UI と下書き保存を組み合わせ、短時間でも記録できる画面構成に整理した。',
-      '記録単位を統一し、写真とメモを同じデータモデルにひも付けることで検索性を高めた。',
+      '案件・棟・内部外部・箇所を自由に組み替えられる構造設計にして、現場の文脈を崩さずに記録できるようにした。',
+      '建材を最小単位として写真とメモをひも付け、保存後は構造に沿って自動整理される導線にした。',
     ],
   },
   {

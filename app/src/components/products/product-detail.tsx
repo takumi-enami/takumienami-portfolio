@@ -13,6 +13,11 @@ export function ProductDetail({ product }: ProductDetailProps) {
         <div className="container">
           <div className="product-detail__hero-grid">
             <div>
+              {product.iconImage ? (
+                <div className="product-detail__icon">
+                  <Image src={product.iconImage} alt={`${product.title} icon`} fill sizes="88px" />
+                </div>
+              ) : null}
               <span className="product-detail__category">{product.category}</span>
               <h1>{product.title}</h1>
               <p>{product.overview}</p>

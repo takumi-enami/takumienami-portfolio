@@ -483,6 +483,15 @@ button {
   padding: 28px;
 }
 
+.skill-card--centered {
+  grid-template-rows: auto auto 1fr;
+}
+
+.skill-card--centered .chip-list {
+  align-self: center;
+  justify-content: center;
+}
+
 .skill-card__title {
   margin: 0;
   font-size: 1.25rem;
@@ -538,6 +547,21 @@ button {
   padding: 24px;
 }
 
+.product-app-icon,
+.product-detail__icon {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.08);
+}
+
+.product-app-icon {
+  width: 72px;
+  height: 72px;
+}
+
 .product-card__body h3,
 .detail-panel h2 {
   margin: 0;
@@ -572,6 +596,12 @@ button {
   font-size: clamp(3rem, 8vw, 5.4rem);
   line-height: 0.95;
   letter-spacing: -0.04em;
+}
+
+.product-detail__icon {
+  width: 88px;
+  height: 88px;
+  margin-bottom: 18px;
 }
 
 .product-detail__hero p {

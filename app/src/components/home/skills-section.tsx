@@ -16,7 +16,11 @@ export function SkillsSection() {
         </Reveal>
         <div className="skills-grid">
           {skillCategories.map((category, index) => (
-            <Reveal key={category.title} className="card skill-card" delay={index * 90}>
+            <Reveal
+              key={category.title}
+              className={`card skill-card${category.centerItems ? ' skill-card--centered' : ''}`}
+              delay={index * 90}
+            >
               <p className="skill-card__title">{category.title}</p>
               <p className="skill-card__description">{category.description}</p>
               <div className="chip-list">
