@@ -1065,6 +1065,7 @@ button {
   .hero__preview-card,
   .hero__all-link,
   .product-card {
+    opacity: 1 !important;
     transition-duration: 0.01ms !important;
     animation: none !important;
     transform: none !important;
