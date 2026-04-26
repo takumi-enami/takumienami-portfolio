@@ -14,7 +14,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
       <section className="section product-detail__hero">
         <div className="container">
           <div className="product-detail__hero-grid">
-            <div>
+            <div className="product-detail__intro">
               {product.iconImage ? (
                 <div className="product-detail__icon">
                   <Image src={product.iconImage} alt={`${product.title} icon`} fill sizes="88px" />
