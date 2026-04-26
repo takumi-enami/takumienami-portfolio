@@ -1,6 +1,7 @@
 import { Container } from '@/components/ui/container';
 import { Reveal } from '@/components/ui/reveal';
 import { SectionHeading } from '@/components/ui/section-heading';
+import { SkillChipIcon } from '@/components/home/skill-chip-icon';
 import { skillCategories, skillLead, skillNote } from '@/data/skills';
 
 export function SkillsSection() {
@@ -26,6 +27,7 @@ export function SkillsSection() {
               <div className="chip-list">
                 {category.items.map((item) => (
                   <span key={item} className="chip">
+                    <SkillChipIcon item={item} />
                     {item}
                   </span>
                 ))}

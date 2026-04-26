@@ -1,3 +1,14 @@
+export type ProductScreenshot = {
+  src: string;
+  alt: string;
+  orientation: 'landscape' | 'portrait';
+};
+
+export type ProductLink = {
+  label: string;
+  url: string;
+};
+
 export type Product = {
   slug: string;
   title: string;
@@ -7,7 +18,8 @@ export type Product = {
   techStack: string[];
   coverImage: string;
   iconImage?: string;
-  screenshots: string[];
+  screenshots: ProductScreenshot[];
+  links?: ProductLink[];
   challenges: string[];
   solutions: string[];
 };
@@ -18,61 +30,117 @@ export const products: Product[] = [
     title: 'AsbestosDetailSheet',
     category: 'Asbestos Screening',
     shortDescription:
-      '石綿調査の考え方を崩さず、現場で決めた構造のまま建材単位の記録と写真整理を進められるオフライン対応アプリ。',
+      '石綿調査の記録構造を現場ごとに柔軟に組み替えながら、そのままデータ化できる業務アプリ。',
     overview:
-      '建物の構造や調査の進め方が現場ごとに異なる前提で、案件・棟・内部外部・箇所・部位を柔軟に組み替えながら記録できるようにした石綿調査向けアプリです。固定フォーマットに現場を合わせるのではなく、現場で考えた構造をそのまま残せることを重視しています。',
+      '案件、棟、内部外部、箇所、部位を現場ごとの考え方に合わせて柔軟に組み替えながら記録できる石綿調査向けアプリです。固定フォーマットに現場を合わせるのではなく、現場で考えた構造をそのまま残せることを重視しています。',
     techStack: ['FlutterFlow', 'Supabase', 'SQLite', 'Cloudflare Pages'],
-    coverImage: '/images/building-material-cover.svg',
+    coverImage: '/images/asbestos-detail-sheet/ads-pc-01.png',
     iconImage: '/images/asbestos-detail-sheet-icon.png',
+    links: [
+      {
+        label: 'LP',
+        url: 'https://asb-screening.com/',
+      },
+      {
+        label: 'Web App',
+        url: 'https://app.asb-screening.com/login',
+      },
+    ],
     screenshots: [
-      '/images/building-material-screen-1.svg',
-      '/images/building-material-screen-2.svg',
+      {
+        src: '/images/asbestos-detail-sheet/ads-pc-02.png',
+        alt: 'AsbestosDetailSheet web screen showing building material usage summary',
+        orientation: 'landscape',
+      },
+      {
+        src: '/images/asbestos-detail-sheet/ads-pc-03.png',
+        alt: 'AsbestosDetailSheet web screen showing template management',
+        orientation: 'landscape',
+      },
+      {
+        src: '/images/asbestos-detail-sheet/ads-pc-04.png',
+        alt: 'AsbestosDetailSheet web screen showing export menu',
+        orientation: 'landscape',
+      },
+      {
+        src: '/images/asbestos-detail-sheet/ads-pc-05.png',
+        alt: 'AsbestosDetailSheet web screen showing material list',
+        orientation: 'landscape',
+      },
+      {
+        src: '/images/asbestos-detail-sheet/ads-mobile-01.png',
+        alt: 'AsbestosDetailSheet mobile screen showing material detail editing',
+        orientation: 'portrait',
+      },
+      {
+        src: '/images/asbestos-detail-sheet/ads-mobile-02.png',
+        alt: 'AsbestosDetailSheet mobile screen showing login form',
+        orientation: 'portrait',
+      },
+      {
+        src: '/images/asbestos-detail-sheet/ads-mobile-03.png',
+        alt: 'AsbestosDetailSheet mobile screen showing member add modal',
+        orientation: 'portrait',
+      },
+      {
+        src: '/images/asbestos-detail-sheet/ads-mobile-04.png',
+        alt: 'AsbestosDetailSheet mobile screen showing project list',
+        orientation: 'portrait',
+      },
+      {
+        src: '/images/asbestos-detail-sheet/ads-mobile-05.png',
+        alt: 'AsbestosDetailSheet mobile screen showing side menu',
+        orientation: 'portrait',
+      },
     ],
     challenges: [
       '内部外部や階層の切り方が案件ごとに異なるため、固定フォーマットでは現場の考え方を記録に落とし込みにくかった。',
-      '建材ごとの写真やメモが後工程で散らばりやすく、事務所に戻ってからの整理負荷が大きかった。',
+      '調査メモと写真が現場ごとに分散しやすく、後工程で参照し直すたびに確認負荷が大きかった。',
     ],
     solutions: [
-      '案件・棟・内部外部・箇所を自由に組み替えられる構造設計にして、現場の文脈を崩さずに記録できるようにした。',
-      '建材を最小単位として写真とメモをひも付け、保存後は構造に沿って自動整理される導線にした。',
+      '案件、棟、内部外部、箇所、部位を自由に組み替えられる記録構造にして、現場の流れを崩さず入力できるようにした。',
+      '写真と記録をひとまとまりで保持し、後から同じ構造で追跡できるようにして確認作業を短縮した。',
     ],
   },
   {
-    slug: 'label-print-support',
-    title: '分析業務用ラベル印刷支援アプリ',
+    slug: 'analysis-qr-code-system',
+    title: '分析業務QRコード管理システム',
     category: 'Lab Workflow',
-    shortDescription: '分析サンプルごとの情報を整形し、誤記を減らしながらラベル発行を行う印刷支援ツール。',
+    shortDescription:
+      'ラベル印刷、QR読み取り、検体進行、履歴確認を1つの流れで管理し、分析業務の受入から記録までを繋げるシステム。',
     overview:
-      '分析業務で扱うラベル印刷の工程を整理し、入力値の揺れや転記ミスを抑えるための支援アプリです。対象ごとのルールをテンプレート化し、現場の運用変更にも対応しやすい構成にしました。',
-    techStack: ['FileMaker', 'SQL', 'JavaScript'],
-    coverImage: '/images/label-print-cover.svg',
-    screenshots: ['/images/label-print-screen-1.svg', '/images/label-print-screen-2.svg'],
+      '分析業務で発生するラベル印刷支援と検体記録管理を統合し、QRコードを軸に受入、前処理、秤量、分析、証明、報告までの進行を一連で追えるようにしたシステムです。印刷したラベルをその場で読み取り、検体コードと作業状態を紐付けることで、紙や手入力に依存しがちな業務フローを整理し、検索、再印刷、履歴確認までを一つの画面群で扱える構成にしました。',
+    techStack: ['Next.js', 'TypeScript', 'SQL', 'JavaScript'],
+    coverImage: '/images/qr-demo/qrdemo-pc-01.png',
+    screenshots: [
+      {
+        src: '/images/qr-demo/qrdemo-pc-01.png',
+        alt: 'QR code scanning workflow on sample bag',
+        orientation: 'landscape',
+      },
+      {
+        src: '/images/qr-demo/qrdemo-pc-02.png',
+        alt: 'Label printer and QR workflow setup',
+        orientation: 'landscape',
+      },
+      {
+        src: '/images/qr-demo/qrdemo-pc-03.png',
+        alt: 'Sample intake list with QR-based process tracking',
+        orientation: 'landscape',
+      },
+      {
+        src: '/images/qr-demo/qrdemo-pc-04.png',
+        alt: 'Sample detail screen showing editable workflow state',
+        orientation: 'landscape',
+      },
+    ],
     challenges: [
-      'ラベルごとに必要な項目が異なり、印刷前の確認コストが高かった。',
-      'Excel や手入力に依存しており、入力ルールの標準化が難しかった。',
+      'ラベル印刷と検体進行の記録が別々の運用になりやすく、現場では再印刷、検索、状態確認のたびに手戻りが発生していた。',
+      '手入力やExcel中心の管理では、検体コード、工程、タイトル、更新履歴の紐付けが弱く、受入後の追跡性が不足しやすかった。',
     ],
     solutions: [
-      'ラベル種別ごとに入力テンプレートを分け、必要項目だけを表示する仕組みにした。',
-      '印刷前チェックを画面内に集約し、差し戻しの発生を減らした。',
-    ],
-  },
-  {
-    slug: 'sample-record-manager',
-    title: '業務記録・検体管理系アプリ',
-    category: 'Record Management',
-    shortDescription: '受付から保管、確認までの流れを見える化し、検体と業務記録を追跡しやすくした管理アプリ。',
-    overview:
-      '検体や業務記録の状態が複数の台帳に分かれていたため、進行状況が分かりにくいという課題に対して作成したアプリです。担当者ごとに必要な画面を整理し、状況確認と履歴参照をしやすくしました。',
-    techStack: ['Next.js', 'TypeScript', 'Supabase', 'Cloudflare Pages'],
-    coverImage: '/images/sample-record-cover.svg',
-    screenshots: ['/images/sample-record-screen-1.svg', '/images/sample-record-screen-2.svg'],
-    challenges: [
-      '受付、保管、確認などの状態が分断され、担当間の引き継ぎに漏れが出やすかった。',
-      '一覧性を重視すると入力しづらくなり、入力しやすさを優先すると情報が散らばる状態だった。',
-    ],
-    solutions: [
-      '状態別の一覧と個別詳細を行き来しやすい構成にして、確認負荷を下げた。',
-      'よく使う操作だけを前面に出し、詳細項目は段階的に見せる UI にした。',
+      'QRコードを共通キーとしてラベル印刷、読み取り、検体一覧、詳細編集を接続し、受入から報告までの進行状況を一つの流れで確認できるようにした。',
+      '一覧画面での再読み込み、状態別タブ、詳細画面での編集保存、再印刷導線を揃えることで、現場運用の確認コストと転記ミスを抑えた。',
     ],
   },
 ];

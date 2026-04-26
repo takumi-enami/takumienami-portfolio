@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+import { SkillChipIcon } from '@/components/home/skill-chip-icon';
+import { ProductGallery } from '@/components/products/product-gallery';
 import type { Product } from '@/data/products';
 
 type ProductDetailProps = {
@@ -24,13 +26,35 @@ export function ProductDetail({ product }: ProductDetailProps) {
               <div className="chip-list">
                 {product.techStack.map((tech) => (
                   <span key={tech} className="chip">
+                    <SkillChipIcon item={tech} />
                     {tech}
                   </span>
                 ))}
               </div>
+              {product.links?.length ? (
+                <div className="product-detail__links">
+                  {product.links.map((link) => (
+                    <a
+                      key={link.url}
+                      href={link.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="button button--secondary"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              ) : null}
             </div>
             <div className="card product-detail__cover">
-              <Image src={product.coverImage} alt={product.title} fill sizes="(max-width: 900px) 100vw, 50vw" />
+              <Image
+                src={product.coverImage}
+                alt={product.title}
+                fill
+                className="product-detail__cover-image"
+                sizes="(max-width: 900px) 100vw, 50vw"
+              />
             </div>
           </div>
         </div>
@@ -56,18 +80,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
               </ul>
             </article>
           </div>
-          <div className="product-detail__gallery">
-            {product.screenshots.map((image, index) => (
-              <div key={image} className="card product-detail__shot">
-                <Image
-                  src={image}
-                  alt={`${product.title} screenshot ${index + 1}`}
-                  fill
-                  sizes="(max-width: 900px) 100vw, 50vw"
-                />
-              </div>
-            ))}
-          </div>
+          <ProductGallery productTitle={product.title} screenshots={product.screenshots} />
         </div>
       </section>
     </div>
