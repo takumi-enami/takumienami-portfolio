@@ -21,14 +21,6 @@ export function HeroSection() {
               <Link href="/products" className="button button--primary">
                 制作物を見る
               </Link>
-              <Link
-                href="https://github.com/takumienami"
-                className="button button--secondary"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHubを見る
-              </Link>
             </div>
           </div>
           <div className="hero__visual card" aria-label="最近つくったプロダクト">
