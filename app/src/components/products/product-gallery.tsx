@@ -18,11 +18,6 @@ const TAB_LABELS: Record<GalleryTab, string> = {
 };
 
 export function ProductGallery({ productTitle, screenshots }: ProductGalleryProps) {
-  const hasPortrait = screenshots.some((image) => image.orientation === 'portrait');
-  const [activeTab, setActiveTab] = useState<GalleryTab>(hasPortrait ? 'pc' : 'pc');
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-
   const tabbedImages = useMemo(
     () => ({
       pc: screenshots.filter((image) => image.orientation === 'landscape'),
@@ -31,55 +26,73 @@ export function ProductGallery({ productTitle, screenshots }: ProductGalleryProp
     [screenshots],
   );
 
-  const availableTabs = (Object.keys(tabbedImages) as GalleryTab[]).filter((tab) => tabbedImages[tab].length > 0);
-  const currentImages = tabbedImages[activeTab].length > 0 ? tabbedImages[activeTab] : tabbedImages[availableTabs[0]];
-  const clampedIndex = Math.min(activeIndex, Math.max(currentImages.length - 1, 0));
-  const activeImage = currentImages[clampedIndex];
+  const availableTabs = (Object.keys(tabbedImages) as GalleryTab[]).filter(
+    (tab) => tabbedImages[tab].length > 0,
+  );
+  const initialTab = availableTabs[0] ?? 'pc';
+
+  const [activeTab, setActiveTab] = useState<GalleryTab>(initialTab);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   useEffect(() => {
-    if (tabbedImages[activeTab].length === 0 && availableTabs[0]) {
-      setActiveTab(availableTabs[0]);
+    if (!availableTabs.includes(activeTab)) {
+      setActiveTab(initialTab);
       setActiveIndex(0);
     }
-  }, [activeTab, availableTabs, tabbedImages]);
+  }, [activeTab, availableTabs, initialTab]);
 
   useEffect(() => {
     setActiveIndex(0);
   }, [activeTab]);
 
+  const currentImages = tabbedImages[activeTab];
+  const safeImages = currentImages.length > 0 ? currentImages : tabbedImages[initialTab];
+  const clampedIndex = Math.min(activeIndex, Math.max(safeImages.length - 1, 0));
+  const activeImage = safeImages[clampedIndex];
+
   useEffect(() => {
-    if (!isLightboxOpen) {
+    if (!isLightboxOpen || safeImages.length <= 1) {
       return;
     }
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setIsLightboxOpen(false);
+        return;
       }
 
       if (event.key === 'ArrowRight') {
-        setActiveIndex((current) => (current + 1) % currentImages.length);
+        setActiveIndex((current) => (current + 1) % safeImages.length);
       }
 
       if (event.key === 'ArrowLeft') {
-        setActiveIndex((current) => (current - 1 + currentImages.length) % currentImages.length);
+        setActiveIndex((current) => (current - 1 + safeImages.length) % safeImages.length);
       }
     };
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [currentImages.length, isLightboxOpen]);
+  }, [isLightboxOpen, safeImages.length]);
 
   if (!activeImage) {
     return null;
   }
 
   const moveToPrevious = () => {
-    setActiveIndex((current) => (current - 1 + currentImages.length) % currentImages.length);
+    if (safeImages.length <= 1) {
+      return;
+    }
+
+    setActiveIndex((current) => (current - 1 + safeImages.length) % safeImages.length);
   };
 
   const moveToNext = () => {
-    setActiveIndex((current) => (current + 1) % currentImages.length);
+    if (safeImages.length <= 1) {
+      return;
+    }
+
+    setActiveIndex((current) => (current + 1) % safeImages.length);
   };
 
   return (
@@ -90,10 +103,20 @@ export function ProductGallery({ productTitle, screenshots }: ProductGalleryProp
             <h2>操作画面</h2>
           </div>
           <div className="product-gallery__actions">
-            <button type="button" className="product-gallery__nav" onClick={moveToPrevious} aria-label="Previous image">
+            <button
+              type="button"
+              className="product-gallery__nav"
+              onClick={moveToPrevious}
+              aria-label="Previous image"
+            >
               ←
             </button>
-            <button type="button" className="product-gallery__nav" onClick={moveToNext} aria-label="Next image">
+            <button
+              type="button"
+              className="product-gallery__nav"
+              onClick={moveToNext}
+              aria-label="Next image"
+            >
               →
             </button>
           </div>
@@ -133,7 +156,7 @@ export function ProductGallery({ productTitle, screenshots }: ProductGalleryProp
         </button>
 
         <div className="product-gallery__rail" role="list" aria-label={`${productTitle} screenshots`}>
-          {currentImages.map((image, index) => (
+          {safeImages.map((image, index) => (
             <button
               key={image.src}
               type="button"
@@ -182,11 +205,16 @@ export function ProductGallery({ productTitle, screenshots }: ProductGalleryProp
               />
             </div>
             <div className="product-lightbox__controls">
-              <button type="button" className="product-gallery__nav" onClick={moveToPrevious} aria-label="Previous image">
+              <button
+                type="button"
+                className="product-gallery__nav"
+                onClick={moveToPrevious}
+                aria-label="Previous image"
+              >
                 ←
               </button>
               <span>
-                {clampedIndex + 1} / {currentImages.length}
+                {clampedIndex + 1} / {safeImages.length}
               </span>
               <button type="button" className="product-gallery__nav" onClick={moveToNext} aria-label="Next image">
                 →

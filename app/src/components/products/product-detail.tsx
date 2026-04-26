@@ -23,14 +23,16 @@ export function ProductDetail({ product }: ProductDetailProps) {
               <span className="product-detail__category">{product.category}</span>
               <h1>{product.title}</h1>
               <p>{product.overview}</p>
-              <div className="chip-list">
-                {product.techStack.map((tech) => (
-                  <span key={tech} className="chip">
-                    <SkillChipIcon item={tech} />
-                    {tech}
-                  </span>
-                ))}
-              </div>
+              {product.techStack.length ? (
+                <div className="chip-list">
+                  {product.techStack.map((tech) => (
+                    <span key={tech} className="chip">
+                      <SkillChipIcon item={tech} />
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
               {product.links?.length ? (
                 <div className="product-detail__links">
                   {product.links.map((link) => (

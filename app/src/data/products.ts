@@ -30,9 +30,9 @@ export const products: Product[] = [
     title: 'AsbestosDetailSheet',
     category: 'Asbestos Screening',
     shortDescription:
-      '石綿調査の記録構造を現場ごとに柔軟に組み替えながら、そのままデータ化できる業務アプリ。',
+      '現場の調査情報をモバイルとWebでつなぎ、建材単位で管理できる業務アプリ。',
     overview:
-      '案件、棟、内部外部、箇所、部位を現場ごとの考え方に合わせて柔軟に組み替えながら記録できる石綿調査向けアプリです。固定フォーマットに現場を合わせるのではなく、現場で考えた構造をそのまま残せることを重視しています。',
+      '部位、階層、室内、写真、建材情報を現場起点で整理しながら記録できる石綿調査向けアプリです。現地での入力と事務所での確認を一つの流れにまとめ、調査漏れや記録のばらつきを抑えられるように設計しました。',
     techStack: ['FlutterFlow', 'Supabase', 'SQLite', 'Cloudflare Pages'],
     coverImage: '/images/asbestos-detail-sheet/ads-pc-01.png',
     iconImage: '/images/asbestos-detail-sheet-icon.png',
@@ -94,12 +94,12 @@ export const products: Product[] = [
       },
     ],
     challenges: [
-      '内部外部や階層の切り方が案件ごとに異なるため、固定フォーマットでは現場の考え方を記録に落とし込みにくかった。',
-      '調査メモと写真が現場ごとに分散しやすく、後工程で参照し直すたびに確認負荷が大きかった。',
+      '部位や建材ごとに調査内容が変わるため、現場では入力項目を毎回判断する負荷が高かった。',
+      '調査メモと写真が建材単位に分離しやすく、あとから報告書へ反映する際に確認工数が増えていた。',
     ],
     solutions: [
-      '案件、棟、内部外部、箇所、部位を自由に組み替えられる記録構造にして、現場の流れを崩さず入力できるようにした。',
-      '写真と記録をひとまとまりで保持し、後から同じ構造で追跡できるようにして確認作業を短縮した。',
+      '部位、階層、室内、建材を自走的にたどれる入力構造にして、現場で迷いにくい調査フローへ整理した。',
+      '写真と調査情報をひとまとまりで保存し、あとから確認しても追跡しやすい記録導線にした。',
     ],
   },
   {
@@ -107,9 +107,9 @@ export const products: Product[] = [
     title: '分析業務QRコード管理システム',
     category: 'Lab Workflow',
     shortDescription:
-      'ラベル印刷、QR読み取り、検体進行、履歴確認を1つの流れで管理し、分析業務の受入から記録までを繋げるシステム。',
+      'ラベル印刷、QR読み取り、受入から報告までの進行管理を一つの流れでつなぐ分析業務システム。',
     overview:
-      '分析業務で発生するラベル印刷支援と検体記録管理を統合し、QRコードを軸に受入、前処理、秤量、分析、証明、報告までの進行を一連で追えるようにしたシステムです。印刷したラベルをその場で読み取り、検体コードと作業状態を紐付けることで、紙や手入力に依存しがちな業務フローを整理し、検索、再印刷、履歴確認までを一つの画面群で扱える構成にしました。',
+      '分析業務で発生するラベル発行、サンプル受入、工程管理、再印刷や状態更新をQRコード起点でまとめた運用システムです。物理ラベルと画面上の進行状態を連動させることで、現場の作業ミスを減らしながら、検体ごとの履歴を追いやすくしました。',
     techStack: ['Next.js', 'TypeScript', 'SQL', 'JavaScript'],
     coverImage: '/images/qr-demo/qrdemo-pc-01.png',
     screenshots: [
@@ -135,12 +135,68 @@ export const products: Product[] = [
       },
     ],
     challenges: [
-      'ラベル印刷と検体進行の記録が別々の運用になりやすく、現場では再印刷、検索、状態確認のたびに手戻りが発生していた。',
-      '手入力やExcel中心の管理では、検体コード、工程、タイトル、更新履歴の紐付けが弱く、受入後の追跡性が不足しやすかった。',
+      'ラベル発行と検体進行の管理が分断されると、現場では貼り間違いや状態反映漏れが起きやすかった。',
+      '紙やExcel中心の運用では、工程変更や再印刷が入るたびに履歴確認と転記負荷が大きくなっていた。',
     ],
     solutions: [
-      'QRコードを共通キーとしてラベル印刷、読み取り、検体一覧、詳細編集を接続し、受入から報告までの進行状況を一つの流れで確認できるようにした。',
-      '一覧画面での再読み込み、状態別タブ、詳細画面での編集保存、再印刷導線を揃えることで、現場運用の確認コストと転記ミスを抑えた。',
+      'QRコードを共通キーにしてラベル発行、読み取り、工程遷移を一本化し、現場での識別ミスを抑えた。',
+      '一覧画面と詳細画面を横断して同じ状態を追えるようにし、再印刷や工程更新の判断を速くした。',
+    ],
+  },
+  {
+    slug: 'kinyacho',
+    title: 'キンヤチョ',
+    category: 'Mobile Form Builder',
+    shortDescription:
+      '現場ごとの帳票テンプレートを自分で組み立て、モバイルで記録作成から保存まで完結できる業務アプリ。',
+    overview:
+      'キンヤチョは、業務ごとに必要な入力項目をテンプレートとして定義し、その場で記録を作成できるモバイルアプリです。帳票の種類や入力項目が頻繁に変わる現場でも、アプリ改修を待たずにテンプレート側で運用を調整できるようにして、記録作成の柔軟性と継続運用のしやすさを両立しました。',
+    techStack: ['Flutter'],
+    coverImage: '/images/kinyacho/kinyacho-thumbnail.png',
+    links: [
+      {
+        label: 'LP',
+        url: 'https://lp.asb-screening.com/kinyacho/',
+      },
+      {
+        label: 'iOS',
+        url: 'https://apps.apple.com/jp/app/%E3%82%AD%E3%83%B3%E3%83%A4%E3%83%81%E3%83%A7/id6760176793',
+      },
+    ],
+    screenshots: [
+      {
+        src: '/images/kinyacho/kinyacho-mobile-01.png',
+        alt: 'Kinyacho mobile screen showing selectable item categories',
+        orientation: 'portrait',
+      },
+      {
+        src: '/images/kinyacho/kinyacho-mobile-02.png',
+        alt: 'Kinyacho mobile screen showing template editing',
+        orientation: 'portrait',
+      },
+      {
+        src: '/images/kinyacho/kinyacho-mobile-03.png',
+        alt: 'Kinyacho mobile screen showing record form input',
+        orientation: 'portrait',
+      },
+      {
+        src: '/images/kinyacho/kinyacho-mobile-04.png',
+        alt: 'Kinyacho mobile screen showing record list',
+        orientation: 'portrait',
+      },
+      {
+        src: '/images/kinyacho/kinyacho-mobile-05.png',
+        alt: 'Kinyacho mobile screen showing template list',
+        orientation: 'portrait',
+      },
+    ],
+    challenges: [
+      '現場ごとに必要な帳票や入力項目が違うため、固定フォームでは運用変更に追従しづらかった。',
+      '紙や単純なメモアプリでは、テンプレート管理と記録作成が分かれていて再利用性が低かった。',
+    ],
+    solutions: [
+      'テンプレート自体をアプリ内で編集できる構成にして、業務ごとの入力ルールを現場側で調整できるようにした。',
+      'テンプレート一覧、記録一覧、記録入力を一続きの導線でまとめ、作成から保存までをモバイルで完結させた。',
     ],
   },
 ];

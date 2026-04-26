@@ -35,6 +35,16 @@ function FlutterFlowIcon({ className }: SvgProps) {
   );
 }
 
+function FlutterIcon({ className }: SvgProps) {
+  return (
+    <BaseIcon className={className}>
+      <path d="M7.2 15.2 12.9 9.5h3.8l-7.6 7.6H7.2Z" fill="#47C5FB" />
+      <path d="M10.6 18.6 16.3 13h3.7l-5.6 5.6h-3.8Z" fill="#00569E" />
+      <path d="M9 8.2 12.9 4.3h3.8L9 16h3.8l1.9 2.6H9.2L5.8 16l3.2-4.7Z" fill="#54C5F8" />
+    </BaseIcon>
+  );
+}
+
 function NextJsIcon({ className }: SvgProps) {
   return (
     <BaseIcon className={className}>
@@ -140,6 +150,7 @@ function DefaultIcon({ className }: SvgProps) {
 }
 
 const skillIconMap: Record<string, (props: SvgProps) => ReactNode> = {
+  Flutter: FlutterIcon,
   FlutterFlow: FlutterFlowIcon,
   'Next.js': NextJsIcon,
   HTML: HtmlIcon,
