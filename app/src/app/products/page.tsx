@@ -4,11 +4,11 @@ import { ProductCard } from '@/components/products/product-card';
 import { Container } from '@/components/ui/container';
 import { Reveal } from '@/components/ui/reveal';
 import { SectionHeading } from '@/components/ui/section-heading';
-import { products } from '@/data/products';
+import { productsByNewest } from '@/data/products';
 
 export const metadata: Metadata = {
   title: 'Products | Takumi Enami Portfolio',
-  description: '制作した業務支援アプリや改善ツールの一覧です。',
+  description: '現場で使いながら育ててきた業務アプリと制作物の一覧です。',
 };
 
 export default function ProductsPage() {
@@ -18,14 +18,14 @@ export default function ProductsPage() {
         <Reveal>
           <SectionHeading
             eyebrow="Products"
-            title="制作したプロダクト一覧"
-            description="実務フローの改善や管理業務の効率化を目的に設計したアプリをまとめています。"
+            title="制作物の一覧"
+            description="入力、確認、整理の流れに手を入れながら更新してきたプロダクトを、新しい順にまとめています。"
           />
         </Reveal>
         <div className="products-grid">
-          {products.map((product, index) => (
+          {productsByNewest.map((product, index) => (
             <Reveal key={product.slug} delay={index * 80}>
-              <ProductCard product={product} />
+              <ProductCard product={product} isLatest={index === 0} />
             </Reveal>
           ))}
         </div>
