@@ -12,7 +12,7 @@ export const skillCategories: SkillCategory[] = [
   {
     title: 'App / Frontend',
     description: 'UI 設計から運用を意識したフロント実装まで、軽やかに組み立てます。',
-    items: ['FlutterFlow', 'Next.js', 'HTML', 'CSS', 'JavaScript', 'TypeScript'],
+    items: ['Flutter', 'FlutterFlow', 'Next.js', 'HTML', 'CSS', 'JavaScript', 'TypeScript'],
   },
   {
     title: 'Backend / Database',

@@ -129,6 +129,16 @@ function GitHubIcon({ className }: SvgProps) {
   );
 }
 
+function GoogleAdMobIcon({ className }: SvgProps) {
+  return (
+    <BaseIcon className={className}>
+      <path d="M8.8 5.2c1.9 0 3.4 1.5 3.4 3.4 0 .6-.1 1.1-.4 1.6l-3.6 6.3a2.4 2.4 0 0 1-2.1 1.2A2.4 2.4 0 0 1 4 14.1l2.6-7.4a2.4 2.4 0 0 1 2.2-1.5Z" fill="#4285F4" />
+      <path d="M14.3 7.2a3.9 3.9 0 0 1 5.4 1.4 3.9 3.9 0 0 1-1.4 5.4l-5.9 3.4a2.6 2.6 0 0 1-2-.2 2.6 2.6 0 0 1-1.3-1.6l-.7-2.3a2.6 2.6 0 0 1 1.2-3l4.7-2.7Z" fill="#34A853" />
+      <circle cx="10.9" cy="12.1" r="1.6" fill="#FBBC04" />
+    </BaseIcon>
+  );
+}
+
 function CloudflareIcon({ className, registrar = false }: SvgProps & { registrar?: boolean }) {
   return (
     <BaseIcon className={className} viewBox="0 0 28 24">
@@ -161,6 +171,7 @@ const skillIconMap: Record<string, (props: SvgProps) => ReactNode> = {
   SQL: DatabaseIcon,
   SQLite: SqliteIcon,
   GitHub: GitHubIcon,
+  GoogleAdMob: GoogleAdMobIcon,
   'Cloudflare Pages': CloudflareIcon,
   'Cloudflare Registrar': (props) => CloudflareIcon({ ...props, registrar: true }),
 };

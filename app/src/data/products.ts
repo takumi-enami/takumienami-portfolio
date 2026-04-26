@@ -199,6 +199,62 @@ export const products: Product[] = [
       'テンプレート一覧、記録一覧、記録入力を一続きの導線でまとめ、作成から保存までをモバイルで完結させた。',
     ],
   },
+  {
+    slug: 'photowake',
+    title: 'フォトワケ',
+    category: 'Photo Workflow',
+    shortDescription:
+      '大量の現場写真をスワイプだけで採用・保留・後回しに仕分け、整理作業を短時間で終わらせるモバイルアプリ。',
+    overview:
+      'フォトワケは、現場や検査で撮りためた大量の写真を、あとから手早く仕分けるためのiOSアプリです。撮影後の写真整理にかかる時間を減らすために、スワイプ中心の操作、フォルダ単位の振り分け、取り込み枚数に応じた課金導線までを一体で設計し、個人利用でも継続しやすい運用にまとめました。',
+    techStack: ['Flutter', 'GoogleAdMob'],
+    coverImage: '/images/photowake/photowake-thumbnail.png',
+    links: [
+      {
+        label: 'LP',
+        url: 'https://lp.asb-screening.com/photowake/',
+      },
+      {
+        label: 'iOS',
+        url: 'https://apps.apple.com/jp/app/%E3%83%95%E3%82%A9%E3%83%88%E3%83%AF%E3%82%B1/id6762072585',
+      },
+    ],
+    screenshots: [
+      {
+        src: '/images/photowake/photowake-mobile-01.png',
+        alt: 'Photowake mobile screen showing photo import grid',
+        orientation: 'portrait',
+      },
+      {
+        src: '/images/photowake/photowake-mobile-02.png',
+        alt: 'Photowake mobile screen showing photo sorting canvas',
+        orientation: 'portrait',
+      },
+      {
+        src: '/images/photowake/photowake-mobile-03.png',
+        alt: 'Photowake mobile screen showing folder management actions',
+        orientation: 'portrait',
+      },
+      {
+        src: '/images/photowake/photowake-mobile-04.png',
+        alt: 'Photowake mobile screen showing billing options',
+        orientation: 'portrait',
+      },
+      {
+        src: '/images/photowake/photowake-mobile-05.png',
+        alt: 'Photowake mobile screen showing main status dashboard',
+        orientation: 'portrait',
+      },
+    ],
+    challenges: [
+      '現場写真は撮影後の仕分け作業が重く、採用・保留・後回しの判断だけでも手間がかかっていた。',
+      'フォルダ整理、写真の振り分け、取り込み制限や課金導線が分かれていると、個人向けアプリとして継続利用しづらかった。',
+    ],
+    solutions: [
+      'スワイプだけで仕分けできる操作系に寄せて、写真選別の判断を短時間で繰り返せる体験にした。',
+      'フォルダ管理、取り込み、課金、仕分け結果の遷移を一つのモバイル導線にまとめ、使い始めから継続利用までの負荷を下げた。',
+    ],
+  },
 ];
 
 export const featuredProducts = products.slice(0, 3);
