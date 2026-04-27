@@ -581,6 +581,90 @@ button {
   margin-top: 32px;
 }
 
+.contact-shell {
+  display: grid;
+  gap: 18px;
+  padding: 36px;
+}
+
+.contact-heading {
+  margin-bottom: 0;
+}
+
+.contact-lead,
+.contact-note,
+.contact-status {
+  margin: 0;
+  color: var(--text-soft);
+}
+
+.contact-note {
+  font-size: 0.96rem;
+}
+
+.contact-form {
+  display: grid;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.form-field {
+  display: grid;
+  gap: 8px;
+}
+
+.form-field span {
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.form-field em,
+.form-field small {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 15px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--text);
+  font: inherit;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.form-field textarea {
+  min-height: 180px;
+  resize: vertical;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: rgba(184, 110, 59, 0.42);
+  box-shadow: 0 0 0 4px rgba(184, 110, 59, 0.12);
+  background: #fff;
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+.contact-submit {
+  cursor: pointer;
+}
+
 .product-badge {
   display: inline-flex;
   align-items: center;
@@ -973,6 +1057,10 @@ button {
     flex-direction: column;
     align-items: flex-start;
   }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 900px) {
@@ -1013,6 +1101,14 @@ button {
 
   .button {
     width: 100%;
+  }
+
+  .contact-shell {
+    padding: 24px 20px;
+  }
+
+  .contact-actions {
+    flex-direction: column;
   }
 
 

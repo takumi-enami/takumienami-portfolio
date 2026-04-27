@@ -6,6 +6,7 @@ const navItems = [
   { href: '/#profile', label: 'Profile' },
   { href: '/#skills', label: 'Skills' },
   { href: '/products', label: 'Products' },
+  { href: '/#contact', label: 'Contact' },
 ];
 
 export function Header() {
