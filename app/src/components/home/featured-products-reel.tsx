@@ -20,6 +20,7 @@ export function FeaturedProductsReel({ products }: FeaturedProductsReelProps) {
     startX: 0,
     startScrollLeft: 0,
   });
+  const suppressClickRef = useRef(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -73,43 +74,52 @@ export function FeaturedProductsReel({ products }: FeaturedProductsReelProps) {
       return;
     }
 
-    const left = card.offsetLeft - (rail.clientWidth - card.clientWidth) / 2;
+    const railRect = rail.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const left = rail.scrollLeft + cardRect.left - railRect.left - (rail.clientWidth - card.clientWidth) / 2;
 
     rail.scrollTo({
       left,
-      behavior: 'smooth',
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
     });
   };
 
   const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
     const rail = railRef.current;
 
-    if (!rail) {
+    if (!rail || event.pointerType !== 'mouse' || event.button !== 0) {
       return;
     }
 
+    suppressClickRef.current = false;
     dragStateRef.current = {
-      active: true,
+      active: false,
       pointerId: event.pointerId,
       moved: false,
       startX: event.clientX,
       startScrollLeft: rail.scrollLeft,
     };
 
-    setIsDragging(true);
-    rail.setPointerCapture(event.pointerId);
   };
 
   const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
     const rail = railRef.current;
     const dragState = dragStateRef.current;
 
-    if (!rail || !dragState.active) {
+    if (!rail || dragState.pointerId !== event.pointerId) {
       return;
     }
 
     const deltaX = event.clientX - dragState.startX;
-    dragStateRef.current.moved = dragStateRef.current.moved || Math.abs(deltaX) > 6;
+    if (!dragState.active && Math.abs(deltaX) > 6) {
+      dragStateRef.current.active = true;
+      dragStateRef.current.moved = true;
+      setIsDragging(true);
+      rail.setPointerCapture(event.pointerId);
+    }
+    if (!dragStateRef.current.active) {
+      return;
+    }
     rail.scrollLeft = dragState.startScrollLeft - deltaX;
   };
 
@@ -117,14 +127,15 @@ export function FeaturedProductsReel({ products }: FeaturedProductsReelProps) {
     const rail = railRef.current;
     const dragState = dragStateRef.current;
 
-    if (!rail || !dragState.active) {
+    if (!rail || dragState.pointerId !== event.pointerId) {
       return;
     }
 
-    if (rail.hasPointerCapture(event.pointerId)) {
+    if (dragState.active && rail.hasPointerCapture(event.pointerId)) {
       rail.releasePointerCapture(event.pointerId);
     }
 
+    suppressClickRef.current = dragState.moved;
     dragStateRef.current = {
       active: false,
       pointerId: -1,
@@ -148,6 +159,7 @@ export function FeaturedProductsReel({ products }: FeaturedProductsReelProps) {
             className="product-gallery__nav"
             onClick={() => scrollToIndex(Math.max(activeIndex - 1, 0))}
             aria-label="前の制作物を見る"
+            disabled={activeIndex === 0}
           >
             ←
           </button>
@@ -156,6 +168,7 @@ export function FeaturedProductsReel({ products }: FeaturedProductsReelProps) {
             className="product-gallery__nav"
             onClick={() => scrollToIndex(Math.min(activeIndex + 1, products.length - 1))}
             aria-label="次の制作物を見る"
+            disabled={activeIndex === products.length - 1}
           >
             →
           </button>
@@ -165,6 +178,7 @@ export function FeaturedProductsReel({ products }: FeaturedProductsReelProps) {
       <div
         ref={railRef}
         className={`products-reel__rail${isDragging ? ' is-dragging' : ''}`}
+        aria-label="制作物を横にスクロール"
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={finishDrag}
@@ -174,14 +188,17 @@ export function FeaturedProductsReel({ products }: FeaturedProductsReelProps) {
           <Link
             key={product.slug}
             href={`/products/${product.slug}`}
+            draggable={false}
             ref={(node) => {
               cardRefs.current[index] = node;
             }}
             className={`products-reel__card${index === activeIndex ? ' is-active' : ''}`}
             aria-label={`${product.title} の詳細を見る`}
+            onDragStart={(event) => event.preventDefault()}
             onClick={(event) => {
-              if (dragStateRef.current.moved) {
+              if (suppressClickRef.current) {
                 event.preventDefault();
+                suppressClickRef.current = false;
               }
             }}
           >
