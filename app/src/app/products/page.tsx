@@ -18,8 +18,8 @@ export default function ProductsPage() {
         <Reveal>
           <SectionHeading
             eyebrow="Products"
-            title="制作物の一覧"
-            description="入力、確認、整理の流れに手を入れながら更新してきたプロダクトを、新しい順にまとめています。"
+            title="現場から生まれたプロダクト"
+            description="入力、確認、整理の流れを現場で改善しながら育ててきたプロダクトを、新しい順に紹介します。"
           />
         </Reveal>
         <div className="products-grid">

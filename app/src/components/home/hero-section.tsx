@@ -1,18 +1,17 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { Container } from '@/components/ui/container';
 import { productsByNewest } from '@/data/products';
 
 export function HeroSection() {
-  const latestProducts = productsByNewest.slice(0, 3);
-
   return (
     <section className="hero section">
       <Container>
         <div className="hero__layout">
           <div className="hero__content">
             <span className="hero__eyebrow hero-copy">Field Worker / Engineer</span>
-            <h1 className="hero__title hero-copy">現場課題を、使える形にする。</h1>
+            <h1 className="hero__title hero-copy"><span>現場課題を、</span><span>使える形にする。</span></h1>
             <p className="hero__description hero-copy">
               現場で詰まりやすい作業を観察し、入力、確認、整理の流れごとアプリに落とし込んでいます。
               単発の作品一覧ではなく、運用しながら磨いているプロダクト群としてまとめています。
@@ -27,18 +26,21 @@ export function HeroSection() {
             <div className="hero__visual-header">
               <p className="hero__visual-title">最近つくったもの</p>
               <p className="hero__visual-caption">
-                現場から生まれた業務アプリを、新しい順に3件だけ並べています。
+                現場の困りごとから生まれたプロダクトを、新しい順に紹介します。
               </p>
             </div>
 
             <div className="hero__visual-grid">
-              {latestProducts.map((product, index) => (
-                <Link key={product.slug} href={`/products/${product.slug}`} className="hero__preview-card">
-                  <div className="hero__preview-meta">
-                    <span className="hero__preview-category">{product.category}</span>
-                    {index === 0 ? <span className="product-badge">NEW</span> : null}
+              {productsByNewest.map((product, index) => (
+                <Link key={product.slug} href={`/products/${product.slug}`} className={`hero__preview-card${index === 0 ? ' hero__preview-card--latest' : ''}`}>
+                  <div className="hero__preview-image">
+                    <Image src={product.coverImage} alt="" fill sizes="(max-width: 640px) 88px, 112px" />
                   </div>
                   <div className="hero__preview-body">
+                    <div className="hero__preview-meta">
+                      <span className="hero__preview-category">{product.category}</span>
+                      {index === 0 ? <span className="product-badge">NEW</span> : null}
+                    </div>
                     <h2>{product.title}</h2>
                     <p>{product.shortDescription}</p>
                   </div>
