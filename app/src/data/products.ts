@@ -13,7 +13,10 @@ export type Product = {
   slug: string;
   title: string;
   category: string;
-  publishedAt: string;
+  publishedAt?: string;
+  addedAt?: string;
+  status?: string;
+  device?: { title: string; description: string };
   problemSolved: string;
   shortDescription: string;
   overview: string;
@@ -27,6 +30,39 @@ export type Product = {
 };
 
 export const products: Product[] = [
+  {
+    slug: 'e-meterlink',
+    title: 'E-MeterLink',
+    category: 'BLE Measurement Platform',
+    addedAt: '2026-11-15',
+    status: '開発中',
+    problemSolved: '測定値の確認から記録データの回収・管理・CSV出力までを、一つのアプリで扱える環境を目指しています。',
+    shortDescription: '測定器と記録データを、ひとつのアプリで。BLE対応の測定器・データロガーを一元管理するモバイルアプリを開発中。',
+    overview: 'E-MeterLinkは、Bluetooth Low Energy（BLE）に対応した測定器・データロガーを一元管理するためのモバイルアプリです。現場で取得した測定値のリアルタイム確認、機器内部の記録データ回収、CSV出力、機器設定などを一つのアプリで扱える環境を目指しています。個人開発プロジェクトとして継続開発中です。',
+    techStack: ['Flutter', 'Dart', 'BLE', 'SQLite（Drift）', 'iOS'],
+    coverImage: '/images/e-meterlink/icon.png',
+    iconImage: '/images/e-meterlink/icon.png',
+    screenshots: [],
+    links: [
+      { label: 'プライバシーポリシー', url: '/products/e-meterlink/privacy-policy' },
+      { label: '利用規約', url: '/products/e-meterlink/terms-of-use' },
+    ],
+    challenges: [
+      '測定器ごとに専用ソフトウェアや回収手順が異なり、データ管理が煩雑になりやすい。',
+      '現場で記録したデータをPCに移して整理するまでに、複数の作業が必要になる。',
+      '複数の測定器を使用する場合、測定値の確認や履歴の管理が分散しやすい。',
+    ],
+    solutions: [
+      'BLE通信によって、対応測定器の測定値をモバイル端末から確認できる仕組みを構築。',
+      '測定器内部の記録を回収し、端末内で管理・CSV出力できる機能を開発。',
+      '機器ごとに通信処理を分離するアダプター方式を採用し、対応機種を段階的に追加できる構成を設計。',
+      '現場での使用を前提として、シンプルな操作性とオフラインでのデータ管理を重視。',
+    ],
+    device: {
+      title: '初期対応機器 — E-THPMeter',
+      description: 'M5StickC Plus2とENV IIIを使用し、温度・相対湿度・気圧を測定・記録する小型データロガーを開発しています。測定器単独での内部記録とBLE通信を組み合わせ、E-MeterLinkからデータを確認・回収する運用を目指しています。',
+    },
+  },
   {
     slug: 'building-material-log',
     title: 'AsbestosDetailSheet',
@@ -268,7 +304,9 @@ export const products: Product[] = [
 ];
 
 export const productsByNewest = [...products].sort(
-  (left, right) => new Date(right.publishedAt).getTime() - new Date(left.publishedAt).getTime(),
+  (left, right) =>
+    new Date(right.addedAt ?? right.publishedAt ?? 0).getTime() -
+    new Date(left.addedAt ?? left.publishedAt ?? 0).getTime(),
 );
 
 export const latestProductSlug = productsByNewest[0]?.slug;

@@ -13,7 +13,7 @@ export function ProductCard({ product, isLatest = false }: ProductCardProps) {
     <article className="card product-card">
       <Link href={`/products/${product.slug}`} className="product-card__link">
         <div className="product-card__image">
-          <Image src={product.coverImage} alt={product.title} fill sizes="(max-width: 900px) 100vw, 33vw" />
+          <Image src={product.coverImage} alt={product.title} fill sizes="(max-width: 900px) 100vw, 33vw" style={product.coverImage === product.iconImage ? { objectFit: 'contain' } : undefined} />
         </div>
         <div className="product-card__body">
           {product.iconImage ? (
@@ -24,10 +24,11 @@ export function ProductCard({ product, isLatest = false }: ProductCardProps) {
           <div className="product-card__meta">
             <span className="product-card__category">{product.category}</span>
             {isLatest ? <span className="product-badge">NEW</span> : null}
+            {product.status ? <span className="product-badge">{product.status}</span> : null}
           </div>
           <h3>{product.title}</h3>
           <p>{product.shortDescription}</p>
-          <p className="product-card__problem">解決したこと: {product.problemSolved}</p>
+          <p className="product-card__problem">{product.status ? '目指すこと' : '解決したこと'}: {product.problemSolved}</p>
           <span className="product-card__cta">詳細を見る</span>
         </div>
       </Link>

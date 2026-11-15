@@ -980,6 +980,42 @@ button {
   gap: 14px;
 }
 
+.product-device {
+  margin-top: 28px;
+}
+
+.product-device p {
+  margin-bottom: 0;
+  color: var(--text-soft);
+}
+
+.legal-document {
+  max-width: 860px;
+  overflow-wrap: anywhere;
+}
+
+.legal-document h1 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  line-height: 1.4;
+}
+
+.legal-document h2 {
+  margin-top: 36px;
+  font-size: 1.3rem;
+}
+
+.legal-document__notice {
+  margin-top: 28px;
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+}
+
+.legal-document article a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 .product-gallery {
   display: grid;
   gap: 20px;

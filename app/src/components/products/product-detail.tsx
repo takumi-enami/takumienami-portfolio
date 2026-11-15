@@ -21,6 +21,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                 </div>
               ) : null}
               <span className="product-detail__category">{product.category}</span>
+              {product.status ? <p><span className="product-badge">{product.status}</span></p> : null}
               <h1>{product.title}</h1>
               <p>{product.overview}</p>
               {product.techStack.length ? (
@@ -39,8 +40,8 @@ export function ProductDetail({ product }: ProductDetailProps) {
                     <a
                       key={link.url}
                       href={link.url}
-                      target="_blank"
-                      rel="noreferrer"
+                      target={link.url.startsWith('/') ? undefined : '_blank'}
+                      rel={link.url.startsWith('/') ? undefined : 'noreferrer'}
                       className="button button--secondary"
                     >
                       {link.label}
@@ -55,6 +56,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                 alt={product.title}
                 fill
                 className="product-detail__cover-image"
+                style={product.coverImage === product.iconImage ? { objectFit: 'contain' } : undefined}
                 sizes="(max-width: 900px) 100vw, 50vw"
               />
             </div>
@@ -82,6 +84,12 @@ export function ProductDetail({ product }: ProductDetailProps) {
               </ul>
             </article>
           </div>
+          {product.device ? (
+            <article className="card detail-panel product-device">
+              <h2>{product.device.title}</h2>
+              <p>{product.device.description}</p>
+            </article>
+          ) : null}
           <ProductGallery productTitle={product.title} screenshots={product.screenshots} />
         </div>
       </section>

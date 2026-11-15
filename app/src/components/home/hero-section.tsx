@@ -34,12 +34,13 @@ export function HeroSection() {
               {productsByNewest.map((product, index) => (
                 <Link key={product.slug} href={`/products/${product.slug}`} className={`hero__preview-card${index === 0 ? ' hero__preview-card--latest' : ''}`}>
                   <div className="hero__preview-image">
-                    <Image src={product.coverImage} alt="" fill sizes="(max-width: 640px) 88px, 112px" />
+                    <Image src={product.coverImage} alt="" fill sizes="(max-width: 640px) 88px, 112px" style={product.coverImage === product.iconImage ? { objectFit: 'contain' } : undefined} />
                   </div>
                   <div className="hero__preview-body">
                     <div className="hero__preview-meta">
                       <span className="hero__preview-category">{product.category}</span>
                       {index === 0 ? <span className="product-badge">NEW</span> : null}
+                      {product.status ? <span className="product-badge">{product.status}</span> : null}
                     </div>
                     <h2>{product.title}</h2>
                     <p>{product.shortDescription}</p>

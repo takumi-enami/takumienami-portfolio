@@ -205,6 +205,7 @@ export function FeaturedProductsReel({ products }: FeaturedProductsReelProps) {
             <div className="products-reel__image">
               <Image
                 src={product.coverImage}
+                style={product.coverImage === product.iconImage ? { objectFit: 'contain' } : undefined}
                 alt={product.title}
                 fill
                 sizes="(max-width: 900px) 80vw, 420px"
@@ -214,10 +215,11 @@ export function FeaturedProductsReel({ products }: FeaturedProductsReelProps) {
               <div className="products-reel__meta">
                 <span className="product-card__category">{product.category}</span>
                 {index === 0 ? <span className="product-badge">NEW</span> : null}
+                {product.status ? <span className="product-badge">{product.status}</span> : null}
               </div>
               <h4>{product.title}</h4>
               <p>{product.shortDescription}</p>
-              <p className="products-reel__problem">解決したこと: {product.problemSolved}</p>
+              <p className="products-reel__problem">{product.status ? '目指すこと' : '解決したこと'}: {product.problemSolved}</p>
             </div>
           </Link>
         ))}
